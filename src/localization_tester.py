@@ -4,11 +4,12 @@ from typing import Dict, List
 from utils.string_parser import StringParser
 from utils.text_analyzer import TextAnalyzer
 from utils.report_generator import ReportGenerator
+import tkinter as tk
+from tkinter import filedialog
 
 class LocalizationTester:
-    def __init__(self):
-        self.project_path = "/Users/giovanni/GV/Projects/Localization-Manager-QA/testLocalizations"
-        self.strings_file = os.path.join(self.project_path, "Localizable.xcstrings")
+    def __init__(self, strings_file: str):
+        self.strings_file = strings_file
         self.string_parser = StringParser()
         self.text_analyzer = TextAnalyzer()
         self.issues = {}
@@ -58,15 +59,28 @@ class LocalizationTester:
         else:
             return generator.generate_console_report()
 
+def select_xcstrings_file() -> str:
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(
+        title="Select .xcstrings file",
+        filetypes=[("Strings Files", "*.xcstrings")]
+    )
+    return file_path
+
 def main():
     parser = argparse.ArgumentParser(description='Test iOS/macOS app localizations')
     parser.add_argument('--report', choices=['console', 'markdown', 'json'],
                         default='console', help='Report format')
     args = parser.parse_args()
 
-    tester = LocalizationTester()
-    tester.analyze_project()
-    print(tester.generate_report(args.report))
+    strings_file = select_xcstrings_file()
+    if strings_file:
+        tester = LocalizationTester(strings_file)
+        tester.analyze_project()
+        print(tester.generate_report(args.report))
+    else:
+        print("No .xcstrings file selected.")
 
 if __name__ == '__main__':
     main()
