@@ -200,4 +200,3 @@ For issues and questions:
 1. Check existing GitHub issues
 2. Create a new issue if needed
 3. Include sample files and reports when reporting bugs
-
