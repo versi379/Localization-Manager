@@ -6,11 +6,11 @@ from utils.text_analyzer import TextAnalyzer
 from utils.report_generator import ReportGenerator
 
 class LocalizationTester:
-    def __init__(self, project_path: str):
-        self.project_path = "/Users/giovanni/GV/Projects/Localization-Manager-QA/testLocalizations/Localizable.xcstrings"
+    def __init__(self):
+        self.project_path = "/Users/giovanni/GV/Projects/Localization-Manager-QA/testLocalizations"
+        self.strings_file = os.path.join(self.project_path, "Localizable.xcstrings")
         self.string_parser = StringParser()
         self.text_analyzer = TextAnalyzer()
-        self.strings_file = None
         self.issues = {}
         self.stats = {
             "total_strings": 0,
@@ -19,19 +19,10 @@ class LocalizationTester:
             "issues_found": 0
         }
 
-    def find_xcstrings_file(self) -> bool:
-        """Find .xcstrings file in the project."""
-        for root, _, files in os.walk(self.project_path):
-            for file in files:
-                if file.endswith('.xcstrings'):
-                    self.strings_file = os.path.join(root, file)
-                    return True
-        return False
-
     def analyze_project(self) -> None:
         """Run all localization tests on the project."""
-        if not self.find_xcstrings_file():
-            print("No .xcstrings file found!")
+        if not os.path.isfile(self.strings_file):
+            print(f"No .xcstrings file found at {self.strings_file}!")
             return
 
         # Parse strings file
@@ -46,13 +37,13 @@ class LocalizationTester:
         # Update stats
         self.stats["total_strings"] = len(translations)
         self.stats["languages"] = list(set(
-            lang for trans in translations.values() 
+            lang for trans in translations.values()
             for lang in trans.keys()
         ))
 
         # Analyze translations
         self.issues = self.text_analyzer.analyze_xcstrings(translations, source_language)
-        
+
         # Update issue stats
         self.stats["issues_found"] = sum(len(issues) for issues in self.issues.values())
         self.stats["missing_translations"] = len(self.issues["missing_translations"])
@@ -60,7 +51,6 @@ class LocalizationTester:
     def generate_report(self, format: str = 'console') -> str:
         """Generate test report in specified format."""
         generator = ReportGenerator(self.issues, self.stats)
-        
         if format == 'markdown':
             return generator.generate_markdown_report()
         elif format == 'json':
@@ -70,15 +60,11 @@ class LocalizationTester:
 
 def main():
     parser = argparse.ArgumentParser(description='Test iOS/macOS app localizations')
-    parser.add_argument('project_path', help='Path to your Xcode project')
-    parser.add_argument('--report', choices=['console', 'markdown', 'json'], 
-                       default='console', help='Report format')
-    parser.add_argument('--watch', action='store_true', 
-                       help='Watch for file changes')
-    
+    parser.add_argument('--report', choices=['console', 'markdown', 'json'],
+                        default='console', help='Report format')
     args = parser.parse_args()
-    
-    tester = LocalizationTester(args.project_path)
+
+    tester = LocalizationTester()
     tester.analyze_project()
     print(tester.generate_report(args.report))
 
