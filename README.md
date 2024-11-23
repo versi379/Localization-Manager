@@ -1,4 +1,5 @@
-# iOS/macOS Localization QA Tool ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+# iOS/macOS Localization QA Tool
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 A powerful Python-based tool for testing and validating iOS/macOS app localizations in `.xcstrings` files. Analyzes translations, identifies potential issues, and generates comprehensive QA reports to ensure your app's localization quality.
 
