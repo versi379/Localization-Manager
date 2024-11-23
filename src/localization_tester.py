@@ -7,7 +7,7 @@ from utils.report_generator import ReportGenerator
 
 class LocalizationTester:
     def __init__(self, project_path: str):
-        self.project_path = project_path
+        self.project_path = "/Users/giovanni/GV/Projects/Localization-Manager-QA/testLocalizations/Localizable.xcstrings"
         self.string_parser = StringParser()
         self.text_analyzer = TextAnalyzer()
         self.strings_file = None
