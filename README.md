@@ -22,90 +22,45 @@ A powerful Python-based tool for testing and validating iOS/macOS app localizati
 
 ## 🛠 Installation
 
-1. Clone the repository:
+Clone the repository:
 ```bash
 git clone https://github.com/yourusername/localization-testing-tool.git
 cd localization-testing-tool
 ```
 
-2. Run the setup script:
-```bash
-chmod +x scripts/setup.sh
-./scripts/setup.sh
-```
-
-This will:
-- Create necessary directories
-- Set up Python virtual environment
-- Install dependencies
-- Build Swift helper tool
-- Create sample files
-- Make utility scripts executable
-
 ## 📚 Project Structure
 
 ```
-localization-testing-tool/
-├── src/                        # Source code
-│   ├── localization_tester.py  # Main script
-│   └── utils/                  # Utility modules
-├── samples/                    # Sample projects
-│   └── xcstrings/             # Sample .xcstrings files
-├── reports/                    # Generated reports
-├── scripts/                    # Utility scripts
-├── tests/                      # Test suite
-└── config.json                 # Configuration
+├── LICENSE                 # License file for the project
+├── README.md               # Project documentation and instructions
+├── src
+│   ├── localization_tester.py  # Main script to test localization functionality
+│   ├── swift
+│   │   └── LocalizationHelper  # Swift code for localization functionality
+│   └── utils
+│       ├── report_generator.py  # Script to generate reports (likely related to testing or results)
+│       ├── string_parser.py  # Script to parse strings (likely for localization)
+│       └── swift_bridge.py  # Bridges Python and Swift code
+└── tests
+    ├── test_analyzer.py    # Unit tests for text_analyzer.py
+    ├── test_parser.py      # Unit tests for string_parser.py
+    └── test_swift_bridge.py  # Unit tests for swift_bridge.py
+
 ```
 
 ## 🎯 Usage
 
-### Running Complete QA Analysis
-
-To analyze all sample projects and generate comprehensive reports:
+To test a single .xcstrings file, simply run the main script:
 
 ```bash
-./scripts/run_all_qa.sh
+python localization_tester.py
 ```
 
 This will:
-1. Process all `.xcstrings` files in `samples/xcstrings/`
-2. Generate reports for each project
-3. Create a summary report
-4. Store everything in the `reports/` directory
-
-### Testing Single Project/File
-
-```bash
-# Test entire project
-./scripts/run_qa.sh /path/to/your/xcode/project
-
-# Test single file
-./scripts/run_qa.sh -s /path/to/Localizable.xcstrings
-
-# Custom output directory and specific formats
-./scripts/run_qa.sh -o custom_reports -f markdown,json /path/to/project
-
-# Watch mode for continuous testing
-./scripts/run_qa.sh -w /path/to/project
-```
-
-### Available Report Formats
-
-- `console`: Terminal-friendly output
-- `markdown`: Detailed report in Markdown format
-- `json`: Machine-readable JSON format
-
-### Report Structure
-
-Reports are organized by project:
-```
-reports/
-├── project_name/
-│   ├── report_console.txt      # Console-friendly format
-│   ├── report_markdown.md      # Detailed markdown report
-│   └── report_json.json        # Machine-readable format
-└── summary.md                  # Overview of all projects
-```
+1. Open a file dialog that allows the user to select the `.xcstrings` file.
+2. Analyze the localization in the selected file.
+3. Generate a Markdown report and save it to a `reports` folder in the same directory as the `.xcstrings` file, with a filename that includes the current date and time.
+4. Print the report to the terminal.
 
 ## 🔍 Issue Detection
 
@@ -130,52 +85,6 @@ The tool identifies several categories of localization issues:
 - Layout mirroring needs
 - RTL-specific formatting
 
-## ⚙️ Configuration
-
-Create or modify `config.json` in your project root:
-
-```json
-{
-  "ignored_keys": ["debug_text", "test_strings"],
-  "length_threshold": 1.5,
-  "rtl_languages": ["ar", "he", "fa"],
-  "default_report_format": "console"
-}
-```
-
-## 🔄 Sample Projects
-
-The `samples/` directory includes example `.xcstrings` files:
-
-- `basic_app.xcstrings`: Simple app UI translations
-- `e_commerce.xcstrings`: Product catalog and checkout flows
-- `social_app.xcstrings`: Social networking interface
-
-## 🛠 Available Scripts
-
-- `scripts/setup.sh`: Initial project setup and configuration
-- `scripts/run_qa.sh`: Single project/file analysis
-- `scripts/run_all_qa.sh`: Complete analysis of all samples
-
-## 💡 Common Commands
-
-```bash
-# Initial setup
-./scripts/setup.sh
-
-# Full QA analysis
-./scripts/run_all_qa.sh
-
-# View summary report
-cat reports/summary.md
-
-# Test specific project
-./scripts/run_qa.sh path/to/project
-
-# Watch mode
-./scripts/run_qa.sh -w path/to/project
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -187,16 +96,3 @@ cat reports/summary.md
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Swift text analysis engine
-- iOS/macOS localization best practices
-- Community contributors
-
-## ❓ Support
-
-For issues and questions:
-1. Check existing GitHub issues
-2. Create a new issue if needed
-3. Include sample files and reports when reporting bugs

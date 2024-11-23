@@ -1,4 +1,3 @@
-# src/utils/__init__.py
 """
 Utility modules for the Localization QA Tool.
 Provides parsing, analysis, and report generation functionality.

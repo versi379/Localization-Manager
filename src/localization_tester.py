@@ -1,5 +1,5 @@
 import os
-import argparse
+import datetime
 from typing import Dict, List
 from utils.string_parser import StringParser
 from utils.text_analyzer import TextAnalyzer
@@ -10,6 +10,7 @@ from tkinter import filedialog
 class LocalizationTester:
     def __init__(self, strings_file: str):
         self.strings_file = strings_file
+        self.report_folder = os.path.join(os.path.dirname(strings_file), "reports")
         self.string_parser = StringParser()
         self.text_analyzer = TextAnalyzer()
         self.issues = {}
@@ -49,15 +50,19 @@ class LocalizationTester:
         self.stats["issues_found"] = sum(len(issues) for issues in self.issues.values())
         self.stats["missing_translations"] = len(self.issues["missing_translations"])
 
-    def generate_report(self, format: str = 'console') -> str:
-        """Generate test report in specified format."""
+    def generate_report(self) -> str:
+        """Generate test report in Markdown format."""
         generator = ReportGenerator(self.issues, self.stats)
-        if format == 'markdown':
-            return generator.generate_markdown_report()
-        elif format == 'json':
-            return generator.generate_json_report()
-        else:
-            return generator.generate_console_report()
+        report = generator.generate_markdown_report()
+
+        # Save report to file
+        os.makedirs(self.report_folder, exist_ok=True)
+        report_file = os.path.join(self.report_folder, f"localization_report_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.md")
+        with open(report_file, "w") as f:
+            f.write(report)
+
+        print(f"Report saved to {report_file}")
+        return report
 
 def select_xcstrings_file() -> str:
     root = tk.Tk()
@@ -69,16 +74,12 @@ def select_xcstrings_file() -> str:
     return file_path
 
 def main():
-    parser = argparse.ArgumentParser(description='Test iOS/macOS app localizations')
-    parser.add_argument('--report', choices=['console', 'markdown', 'json'],
-                        default='console', help='Report format')
-    args = parser.parse_args()
-
     strings_file = select_xcstrings_file()
     if strings_file:
         tester = LocalizationTester(strings_file)
         tester.analyze_project()
-        print(tester.generate_report(args.report))
+        report = tester.generate_report()
+        print(report)
     else:
         print("No .xcstrings file selected.")
 
