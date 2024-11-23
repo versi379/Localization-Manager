@@ -5,11 +5,8 @@ from typing import Dict, Any
 
 class SwiftBridge:
     def __init__(self):
-        self.helper_path = os.path.join(
-            os.path.dirname(__file__),
-            '../swift/LocalizationHelper/build/Release/LocalizationHelper'
-        )
-        
+        self.helper_path = '/Users/giovanni/GV/Projects/Localization-Manager-QA/src/swift/LocalizationHelper/LocalizationHelper/LocalizationHelper'
+
         if not os.path.exists(self.helper_path):
             raise FileNotFoundError(
                 "LocalizationHelper binary not found. Please build the Swift helper first."
