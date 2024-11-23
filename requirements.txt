@@ -1,0 +1,5 @@
+pyyaml>=5.1
+watchdog>=2.1.6
+markdown>=3.3
+rich>=10.0.0
+click>=8.0.0
