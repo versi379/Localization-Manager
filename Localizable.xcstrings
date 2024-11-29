@@ -1,0 +1,142 @@
+{
+    "sourceLanguage": "en",
+    "strings": {
+        "Greeting": {
+            "localizations": {
+                "en": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "Hello, %@"
+                    }
+                },
+                "es": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "Hola, %@"
+                    }
+                },
+                "fr": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "Bonjour, %@"
+                    }
+                },
+                "ar": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "مرحبا، %@"
+                    }
+                }
+            }
+        },
+        "LongTextExample": {
+            "localizations": {
+                "en": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "This is a long piece of text meant to test length-related issues."
+                    }
+                },
+                "fr": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "Ceci est un long texte destiné à tester les problèmes liés à la longueur."
+                    }
+                },
+                "de": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "Dies ist ein langer Text, der verwendet wird, um Längenprobleme zu testen."
+                    }
+                }
+            }
+        },
+        "MissingTranslation": {
+            "localizations": {
+                "en": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "This string is properly localized in English."
+                    }
+                },
+                "es": {
+                    "stringUnit": {
+                        "state": "needs_translation"
+                    }
+                }
+            }
+        },
+        "FormatSpecifiers": {
+            "localizations": {
+                "en": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "File saved: %@"
+                    }
+                },
+                "ja": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "ファイルが保存されました"
+                    }
+                }
+            }
+        },
+        "RTLExample": {
+            "localizations": {
+                "en": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "Click here to proceed."
+                    }
+                },
+                "ar": {
+                    "stringUnit": {
+                        "state": "translated",
+                        "value": "اضغط هنا للمتابعة"
+                    }
+                }
+            }
+        },
+        "PluralExample": {
+            "localizations": {
+                "en": {
+                    "variations": {
+                        "plural": {
+                            "one": {
+                                "stringUnit": {
+                                    "state": "translated",
+                                    "value": "One item"
+                                }
+                            },
+                            "other": {
+                                "stringUnit": {
+                                    "state": "translated",
+                                    "value": "%@ items"
+                                }
+                            }
+                        }
+                    }
+                },
+                "fr": {
+                    "variations": {
+                        "plural": {
+                            "one": {
+                                "stringUnit": {
+                                    "state": "translated",
+                                    "value": "Un article"
+                                }
+                            },
+                            "other": {
+                                "stringUnit": {
+                                    "state": "needs_translation"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "version": "1.0"
+}
