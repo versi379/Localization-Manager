@@ -38,8 +38,8 @@ cd localization-testing-tool
 │   ├── swift
 │   │   └── LocalizationHelper  # Swift code for localization functionality
 │   └── utils
-│       ├── report_generator.py  # Script to generate reports (likely related to testing or results)
-│       ├── string_parser.py  # Script to parse strings (likely for localization)
+│       ├── report_generator.py  # Script to generate reports
+│       ├── string_parser.py  # Script to parse strings
 │       └── swift_bridge.py  # Bridges Python and Swift code
 └── tests
     ├── test_analyzer.py    # Unit tests for text_analyzer.py
